@@ -149,7 +149,7 @@ public class SwingingDoorScript : MonoBehaviour
 	public bool bDoorLocked;
 
 	// Token: 0x040005E9 RID: 1513
-	private bool requirementMet;
+	public bool requirementMet;
 
 	// Token: 0x040005EA RID: 1514
 	private AudioSource myAudio;
