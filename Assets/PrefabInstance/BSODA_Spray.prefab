@@ -7,6 +7,27 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1901641434922210046, guid: 209ba50627db1184d86226ef966e4375,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 5d6756f1d9ed2fc429a0834561a6d302,
+        type: 3}
+    - target: {fileID: 1901641434922210046, guid: 209ba50627db1184d86226ef966e4375,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1901641434922210046, guid: 209ba50627db1184d86226ef966e4375,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1901641434922210046, guid: 209ba50627db1184d86226ef966e4375,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3914625570200266741, guid: 209ba50627db1184d86226ef966e4375,
         type: 3}
       propertyPath: m_Name
@@ -67,5 +88,31 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 4895563972503536098, guid: 209ba50627db1184d86226ef966e4375,
+        type: 3}
+      propertyPath: m_Name
+      value: BSODA_Spray
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 5008749044690222236, guid: 209ba50627db1184d86226ef966e4375, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 209ba50627db1184d86226ef966e4375, type: 3}
+--- !u!1 &8477387009143609467 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4895563972503536098, guid: 209ba50627db1184d86226ef966e4375,
+    type: 3}
+  m_PrefabInstance: {fileID: 3915092552990202265}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &6536902945302730080
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8477387009143609467}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb8b14389c56bf54d99979553ff2d836, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 50
+  shouldRotate: 1
