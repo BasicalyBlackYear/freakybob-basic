@@ -470,7 +470,14 @@ public class GameControllerScript : MonoBehaviour
 				base.StartCoroutine(this.BootAnimation());
 				this.ResetItem();
 			}
-		}
+            else if (this.item[this.itemSelected] == 11)
+            {
+                UnityEngine.Object.Instantiate<GameObject>(this.hammerThrow, this.playerTransform.position, this.cameraTransform.rotation);
+                this.ResetItem();
+                this.player.ResetGuilt("throwing", 1f);
+                this.audioDevice.PlayOneShot(this.aud_Throw);
+            }
+        }
 	}
 
 	// Token: 0x06000977 RID: 2423 RVA: 0x00022B40 File Offset: 0x00020F40
@@ -825,6 +832,10 @@ public class GameControllerScript : MonoBehaviour
 
 	// Token: 0x0400063J RID: 1603
 	public bool useEmptyMachine = false;
+
+	public AudioClip aud_Throw;
+
+	public GameObject hammerThrow;
 
 	// Token: 0x0400063K RID: 1604
 	//private Player playerInput;

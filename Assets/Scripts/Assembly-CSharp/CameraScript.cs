@@ -56,7 +56,13 @@ public class CameraScript : MonoBehaviour
 			base.transform.position = this.player.transform.position + this.offset + this.jumpHeightV3; //Apply the jump rope vector onto the normal offset
 			base.transform.rotation = this.player.transform.rotation; //Rotate based on player direction
 		}
-	}
+        else if (this.ps.camera3dIsActive)
+        {
+            float num = Input.GetAxis("Mouse Y") * this.ps.mouseSensitivity;
+            FreecamLookX -= num;
+            FreecamLookX = Mathf.Clamp(FreecamLookX, -90f, 90f);
+        }
+    }
 
 	// Token: 0x040005B0 RID: 1456
 	public GameObject player;
@@ -87,5 +93,7 @@ public class CameraScript : MonoBehaviour
 
 	// Token: 0x040005B9 RID: 1465
 	public Vector3 jumpHeightV3;
+
+    public float FreecamLookX;
 
 }

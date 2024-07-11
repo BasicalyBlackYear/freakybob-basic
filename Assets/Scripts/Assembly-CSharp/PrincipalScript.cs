@@ -122,7 +122,11 @@ public class PrincipalScript : MonoBehaviour
 		{
 			this.audioQueue.QueueAudio(this.audNoEscaping);
 		}
-	}
+        else if (this.playerScript.guiltType == "throwing")
+        {
+            this.audioQueue.QueueAudio(this.audNoThrowing);
+        }
+    }
 
 	// Token: 0x060009C3 RID: 2499 RVA: 0x0002539C File Offset: 0x0002379C
 	private void OnTriggerStay(Collider other)
@@ -256,8 +260,10 @@ public class PrincipalScript : MonoBehaviour
 	// Token: 0x040006D1 RID: 1745
 	public AudioClip audNoEscaping;
 
-	// Token: 0x040006D2 RID: 1746
-	public AudioClip aud_Whistle;
+    public AudioClip audNoThrowing;
+
+    // Token: 0x040006D2 RID: 1746
+    public AudioClip aud_Whistle;
 
 	// Token: 0x040006D3 RID: 1747
 	public AudioClip aud_Delay;

@@ -15,7 +15,11 @@ public class PlayerScript : MonoBehaviour
 		{
 			this.sensitivityActive = true;
 		}
-		this.height = base.transform.position.y;
+        if (PlayerPrefs.GetInt("3dCameraActive") == 1)
+        {
+            this.camera3dIsActive = true;
+        }
+        this.height = base.transform.position.y;
 		this.stamina = this.maxStamina;
 		this.playerRotation = base.transform.rotation;
 		this.mouseSensitivity = PlayerPrefs.GetFloat("MouseSensitivity");
@@ -37,7 +41,11 @@ public class PlayerScript : MonoBehaviour
 		{
 			this.gc.LockMouse();
 		}
-		if (this.jumpRope & ((base.transform.position - frozenPosition).magnitude >= 1f) && cameraScript.jumpHeight < 0.1f) // If the player moves, deactivate the jumprope minigame
+        if (this.camera3dIsActive)
+        {
+            this.camera3D();
+        }
+        if (this.jumpRope & ((base.transform.position - frozenPosition).magnitude >= 1f) && cameraScript.jumpHeight < 0.1f) // If the player moves, deactivate the jumprope minigame
 		{
 			this.DeactivateJumpRope();
 			this.playtime.Disappoint();
@@ -61,8 +69,21 @@ public class PlayerScript : MonoBehaviour
 		base.transform.rotation = this.playerRotation;
 	}
 
-	// Token: 0x060009D6 RID: 2518 RVA: 0x00025EAC File Offset: 0x000242AC
-	private void PlayerMove()
+    private void camera3D()
+
+    {
+        if (this.camera3dIsActive)
+        {
+            this.playerRotation.eulerAngles = new Vector3(this.playerRotation.eulerAngles.x, this.playerRotation.eulerAngles.y, this.fliparoo);
+
+            this.playerRotation.eulerAngles += new Vector3(-Input.GetAxis("Mouse Y") * this.mouseSensitivity * Time.timeScale, Input.GetAxis("Mouse X") * this.mouseSensitivity * Time.timeScale, 0f) * this.flipaturn;
+
+            base.transform.rotation = this.playerRotation;
+        }
+    }
+
+    // Token: 0x060009D6 RID: 2518 RVA: 0x00025EAC File Offset: 0x000242AC
+    private void PlayerMove()
 	{
 		Vector3 vector = new Vector3(0f, 0f, 0f);
 		Vector3 vector2 = new Vector3(0f, 0f, 0f);
@@ -401,4 +422,6 @@ public class PlayerScript : MonoBehaviour
 
 	// Token: 0x04000717 RID: 1815
     private CameraScript cameraScript;
+
+    public bool camera3dIsActive;
 }

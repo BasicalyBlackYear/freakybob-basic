@@ -25,9 +25,13 @@ public class OptionsManager : MonoBehaviour
 			{
 				analog.isOn = true;
 			}
-			else
+            if (PlayerPrefs.GetInt("3dCameraActive") == 1)
+            {
+                Move3D.isOn = true;
+            }
+            else
 			{
-				analog.isOn = false;
+				Move3D.isOn = false;
 			}
 			if (PlayerPrefs.GetInt("V-Sync") == 0)
             {
@@ -106,7 +110,15 @@ public class OptionsManager : MonoBehaviour
 		{
 			PlayerPrefs.SetInt("AnalogMove", 0);
 		}
-		if (this.Vsync.isOn)
+        if (Move3D.isOn)
+        {
+            PlayerPrefs.SetInt("3dCameraActive", 1);
+        }
+        else
+        {
+            PlayerPrefs.SetInt("3dCameraActive", 0);
+        }
+        if (this.Vsync.isOn)
         {
             PlayerPrefs.SetInt("V-Sync", 1);
 			QualitySettings.vSyncCount = 1;
@@ -165,8 +177,11 @@ public class OptionsManager : MonoBehaviour
 	// Token: 0x04000071 RID: 113
 	public Toggle analog;
 
-	// Token: 0x04000072 RID: 114
-	public Toggle Vsync;
+    // Token: 0x04000071 RID: 113
+    public Toggle Move3D;
+
+    // Token: 0x04000072 RID: 114
+    public Toggle Vsync;
 
 	// Token: 0x04000073 RID: 115
 	[SerializeField]
