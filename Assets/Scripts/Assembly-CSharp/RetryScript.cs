@@ -24,5 +24,6 @@ public class RetryScript : MonoBehaviour
     {
         Time.timeScale = 1f;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        AudioListener.pause = false;
     }
 }
