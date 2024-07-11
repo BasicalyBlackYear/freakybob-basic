@@ -10,20 +10,6 @@ public class HammerThrowScript : MonoBehaviour
 		this.rb = base.GetComponent<Rigidbody>(); //Get the RigidBody
 		this.rb.velocity = base.transform.forward * this.speed; //Move forward
 		this.lifeSpan = 30f; //Set the lifespan
-        RaycastHit raycastHit7;
-        Ray ray7 = Camera.main.ScreenPointToRay(new Vector3((float)(Screen.width / 2), (float)(Screen.height / 2), 0f));
-        if (Physics.Raycast(ray7, out raycastHit7) && raycastHit7.collider.name.Contains("Window"))
-        {
-            WallScript wall = raycastHit7.collider.gameObject.GetComponent<WallScript>();
-            if (wall != null)
-            {
-                wall.PlacePortal();
-            }
-        }
-        else if (Physics.Raycast(ray7, out raycastHit7) && raycastHit7.collider.name.Contains("Wall"))
-        {
-            UnityEngine.Object.Destroy(base.gameObject, 0f);
-        }
     }
 
 	// Token: 0x0600092B RID: 2347 RVA: 0x00020C5C File Offset: 0x0001F05C
@@ -37,8 +23,20 @@ public class HammerThrowScript : MonoBehaviour
 		}
 	}
 
-	// Token: 0x040005AD RID: 1453
-	public float speed;
+    public void OnCollisionEnter(Collision collision)
+    {
+        if (collision.collider.name.Contains("Window"))
+        {
+            WallScript wall = collision.collider.gameObject.GetComponent<WallScript>();
+            if (wall != null)
+            {
+                wall.PlacePortal();
+            }
+        }
+    }
+
+    // Token: 0x040005AD RID: 1453
+    public float speed;
 
 	// Token: 0x040005AE RID: 1454
 	private float lifeSpan;

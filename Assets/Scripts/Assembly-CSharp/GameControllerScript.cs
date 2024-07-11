@@ -134,12 +134,12 @@ public class GameControllerScript : MonoBehaviour
 	{
 		if (this.mode == "story")
 		{
-			this.notebookCount.text = this.notebooks.ToString() + "/" + this.maxNotebooks + " Freakybooks";
+			this.notebookCount.text = this.notebooks.ToString() + "/" + this.maxNotebooks + this.notebooksName;
 			//this.notebookCount.text = "Notebooks Left: " + (this.maxNotebooks - this.notebooks).ToString();
 		}
 		else
 		{
-			this.notebookCount.text = this.notebooks.ToString() + " Freakybooks";
+			this.notebookCount.text = this.notebooks.ToString() + this.notebooksName;
 			//this.notebookCount.text = "Notebooks Found: " + this.notebooks.ToString();
 		}
 		if (this.notebooks == this.maxNotebooks & this.mode == "story")
@@ -678,6 +678,8 @@ public class GameControllerScript : MonoBehaviour
 
 	// Token: 0x04000724 RID: 8723
 	public int maxNotebooks;
+
+	public string notebooksName;
 
 	// Token: 0x04000614 RID: 1556
 	public GameObject[] notebookPickups;
