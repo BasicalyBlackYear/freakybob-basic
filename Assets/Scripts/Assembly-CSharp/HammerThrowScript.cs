@@ -18,10 +18,6 @@ public class HammerThrowScript : MonoBehaviour
             if (wall != null)
             {
                 wall.PlacePortal();
-                if (wall.otherWall != null)
-                {
-
-                }
             }
         }
         else if (Physics.Raycast(ray7, out raycastHit7) && raycastHit7.collider.name.Contains("Wall"))

@@ -168,4 +168,8 @@ public class DoorScript : MonoBehaviour
 	// Token: 0x040005D4 RID: 1492
 	private AudioSource myAudio;
 
+	public AudioClip doorClick;
+
+	public AudioClip doorUnclick;
+
 }
