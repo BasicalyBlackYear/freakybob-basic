@@ -93,8 +93,13 @@ PrefabInstance:
       propertyPath: m_Name
       value: BSODA_Spray
       objectReference: {fileID: 0}
+    - target: {fileID: 4895563972503536098, guid: 209ba50627db1184d86226ef966e4375,
+        type: 3}
+      propertyPath: m_TagString
+      value: BSODA
+      objectReference: {fileID: 0}
     m_RemovedComponents:
-    - {fileID: 5008749044690222236, guid: 209ba50627db1184d86226ef966e4375, type: 3}
+    - {fileID: 2040309925423297834, guid: 209ba50627db1184d86226ef966e4375, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 209ba50627db1184d86226ef966e4375, type: 3}
 --- !u!1 &8477387009143609467 stripped
 GameObject:
@@ -114,5 +119,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb8b14389c56bf54d99979553ff2d836, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 50
+  speed: 10
   shouldRotate: 1

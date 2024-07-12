@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using UnityEngine.AI;
 
 // Token: 0x020000B4 RID: 180
 public class HammerThrowScript : MonoBehaviour
@@ -23,14 +24,18 @@ public class HammerThrowScript : MonoBehaviour
 		}
 	}
 
-    public void OnCollisionEnter(Collision collision)
+	private void OnCollisionEnter(Collision collision)
     {
-        if (collision.collider.name.Contains("Window"))
+        if (collision.collider.name.Contains("Window") && Vector3.Distance(playerTransform.position, collision.transform.position) <= 10f)
         {
             WallScript wall = collision.collider.gameObject.GetComponent<WallScript>();
             if (wall != null)
             {
                 wall.PlacePortal();
+                if (wall.otherWall != null)
+                {
+
+                }
             }
         }
     }
@@ -42,5 +47,7 @@ public class HammerThrowScript : MonoBehaviour
 	private float lifeSpan;
 
 	// Token: 0x040005AF RID: 1455
-	private Rigidbody rb;                   
+	private Rigidbody rb;   
+	
+	private Transform playerTransform;
 }
