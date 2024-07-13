@@ -1,3 +1,1 @@
-Freaky bob
-MANE WHO TF CALLIN ME
-FREAKY BOB I AINT ANSWERIN
+freakyboub - blackyear 2024
