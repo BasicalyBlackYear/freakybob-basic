@@ -69,11 +69,9 @@ public class ElevatorButton : MonoBehaviour
     {
         if (this.currentMode == ElevatorButton.Mode.Up)
         {
-            this.Elevator.IsCallingTheElevatorUp = true;
         }
         else if (this.currentMode == ElevatorButton.Mode.Down)
         {
-            this.Elevator.IsCallingTheElevatorUp = false;
         }
     }
 

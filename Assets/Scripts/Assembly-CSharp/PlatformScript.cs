@@ -24,12 +24,11 @@ public class PlatformScript : MonoBehaviour
 			this.activated = true;
 			base.StartCoroutine(this.LiftUp());
 			this.wall.enabled = false;
-			this.IsCallingTheElevatorUp = true;
 		}
 		else
         {
             base.StartCoroutine(this.LiftDown());
-            this.IsCallingTheElevatorUp = false;
+			this.activated = true;
         }
     }
 
@@ -53,18 +52,12 @@ public class PlatformScript : MonoBehaviour
 
     private IEnumerator LiftDown()
     {
-        while (base.transform.position.y > this.height)
+        while (base.transform.position.y < this.height)
         {
-            base.transform.position = base.transform.position + Vector3.down * (this.speed * Time.deltaTime);
+            base.transform.position = base.transform.position + Vector3.up * (this.speed * Time.deltaTime);
             this.ps.height = base.transform.position.y + this.offset;
             yield return null;
         }
-        Transform transform = base.transform;
-        Vector3 position = new Vector3(base.transform.position.x, this.height, base.transform.position.z);
-        base.transform.position = position;
-        transform.position = position;
-        this.ps.height = this.height + this.offset;
-        this.audioDevice.Stop();
         yield break;
     }
 
@@ -107,5 +100,7 @@ public class PlatformScript : MonoBehaviour
 
 	private GameObject GameController;
 
-	public bool IsCallingTheElevatorUp;
+	public bool reverse;
+
+	int i;
 }
