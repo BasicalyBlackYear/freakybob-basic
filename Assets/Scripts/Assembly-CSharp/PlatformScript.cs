@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 // Token: 0x02000023 RID: 35
@@ -21,13 +22,19 @@ public class PlatformScript : MonoBehaviour
 			this.audioDevice.Play();
 			this.audioDevice.loop = true;
 			this.activated = true;
-			base.StartCoroutine(this.Lift());
+			base.StartCoroutine(this.LiftUp());
 			this.wall.enabled = false;
+			this.IsCallingTheElevatorUp = true;
 		}
-	}
+		else
+        {
+            base.StartCoroutine(this.LiftDown());
+            this.IsCallingTheElevatorUp = false;
+        }
+    }
 
 	// Token: 0x0600007C RID: 124 RVA: 0x00004170 File Offset: 0x00002570
-	private IEnumerator Lift()
+	private IEnumerator LiftUp()
 	{
 		while (base.transform.position.y < this.height)
 		{
@@ -44,8 +51,25 @@ public class PlatformScript : MonoBehaviour
 		yield break;
 	}
 
-	// Token: 0x04000092 RID: 146
-	[SerializeField]
+    private IEnumerator LiftDown()
+    {
+        while (base.transform.position.y > this.height)
+        {
+            base.transform.position = base.transform.position + Vector3.down * (this.speed * Time.deltaTime);
+            this.ps.height = base.transform.position.y + this.offset;
+            yield return null;
+        }
+        Transform transform = base.transform;
+        Vector3 position = new Vector3(base.transform.position.x, this.height, base.transform.position.z);
+        base.transform.position = position;
+        transform.position = position;
+        this.ps.height = this.height + this.offset;
+        this.audioDevice.Stop();
+        yield break;
+    }
+
+    // Token: 0x04000092 RID: 146
+    [SerializeField]
 	private GameControllerScript gc;
 
 	// Token: 0x04000093 RID: 147
@@ -82,4 +106,6 @@ public class PlatformScript : MonoBehaviour
 	private GameObject player;
 
 	private GameObject GameController;
+
+	public bool IsCallingTheElevatorUp;
 }

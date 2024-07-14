@@ -35,6 +35,8 @@ public class ElevatorButton : MonoBehaviour
 
     public Transform playerTransform;
 
+    public PlatformScript Elevator;
+
 
     // Start is called before the first frame update
     void Start()
@@ -59,6 +61,7 @@ public class ElevatorButton : MonoBehaviour
             if (Physics.Raycast(ray, out raycastHit) && (raycastHit.collider == this.trigger))
             {
                 this.ButtonPress();
+                this.CallElevator();
             }
         }
     }
@@ -66,7 +69,11 @@ public class ElevatorButton : MonoBehaviour
     {
         if (this.currentMode == ElevatorButton.Mode.Up)
         {
-
+            this.Elevator.IsCallingTheElevatorUp = true;
+        }
+        else if (this.currentMode == ElevatorButton.Mode.Down)
+        {
+            this.Elevator.IsCallingTheElevatorUp = false;
         }
     }
 
