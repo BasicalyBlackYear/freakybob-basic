@@ -54,7 +54,7 @@ public class PlatformScript : MonoBehaviour
     {
         while (base.transform.position.y < this.height)
         {
-            base.transform.position = base.transform.position + Vector3.up * (this.speed * Time.deltaTime);
+            base.transform.position = base.transform.position + Vector3.down * (this.speed * Time.deltaTime);
             this.ps.height = base.transform.position.y + this.offset;
             yield return null;
         }
