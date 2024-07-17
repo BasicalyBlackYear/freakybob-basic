@@ -15,7 +15,11 @@ public class ElevatorButton : MonoBehaviour
 
     public Material unpressed;
 
-    public MeshRenderer button;
+    public Sprite Bpressed;
+
+    public Sprite Bunpressed;
+
+    public SpriteRenderer button;
 
     public Collider trigger;
 
@@ -50,6 +54,7 @@ public class ElevatorButton : MonoBehaviour
         if (this.stillsPressed)
         {
             this.button.material = unpressed;
+            this.button.sprite = Bunpressed;
             this.audioDevice.PlayOneShot(this.aud_Release);
             this.stillsPressed = false;
         }
@@ -82,7 +87,8 @@ public class ElevatorButton : MonoBehaviour
             this.audioDevice.PlayOneShot(this.aud_Release);
         }
        this.button.material = pressed;
+       this.button.sprite = Bpressed;
 
-       this.stillsPressed = true;
+        this.stillsPressed = true;
     }
 }
