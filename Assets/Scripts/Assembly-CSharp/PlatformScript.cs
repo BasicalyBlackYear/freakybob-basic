@@ -28,7 +28,7 @@ public class PlatformScript : MonoBehaviour
 		else
         {
             base.StartCoroutine(this.LiftDown());
-			this.activated = true;
+			this.reverse = 1;
         }
     }
 
@@ -50,16 +50,27 @@ public class PlatformScript : MonoBehaviour
 		yield break;
 	}
 
-    private IEnumerator LiftDown()
+private IEnumerator LiftDown()
+{
+    this.reverse = 1;
+    float startY = base.transform.position.y;
+    float targetY = startY - this.height;
+
+    while (base.transform.position.y > targetY)
     {
-        while (base.transform.position.y < this.height)
-        {
-            base.transform.position = base.transform.position + Vector3.down * (this.speed * Time.deltaTime);
-            this.ps.height = base.transform.position.y + this.offset;
-            yield return null;
-        }
-        yield break;
+        base.transform.position = Vector3.MoveTowards(
+            base.transform.position,
+            new Vector3(base.transform.position.x, targetY, base.transform.position.z),
+            this.speed * Time.deltaTime
+        );
+        this.ps.height = base.transform.position.y + this.offset;
+        yield return null;
     }
+
+    this.reverse = 0;
+    yield break;
+}
+
 
     // Token: 0x04000092 RID: 146
     [SerializeField]
@@ -100,7 +111,7 @@ public class PlatformScript : MonoBehaviour
 
 	private GameObject GameController;
 
-	public bool reverse;
+	public int reverse;
 
 	int i;
 }
