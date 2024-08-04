@@ -25,6 +25,17 @@ public class PlatformScript : MonoBehaviour
 			base.StartCoroutine(this.LiftUp());
 			this.wall.enabled = false;
 		}
+		else
+		{
+            this.offset = this.ps.transform.position.y - base.transform.position.y;
+            this.ps.transform.position = base.transform.position - Vector3.up * this.offset;
+            this.audioDevice.clip = this.motor;
+            this.audioDevice.Play();
+            this.audioDevice.loop = true;
+            this.activated = true;
+            base.StartCoroutine(this.LiftDown());
+            this.wall.enabled = false;
+        }
     }
 
 	// Token: 0x0600007C RID: 124 RVA: 0x00004170 File Offset: 0x00002570
@@ -34,7 +45,8 @@ public class PlatformScript : MonoBehaviour
 		{
 			base.transform.position = base.transform.position + Vector3.up * (this.speed * Time.deltaTime);
 			this.ps.height = base.transform.position.y + this.offset;
-			yield return null;
+            this.itsOnFloor = false;
+            yield return null;
 		}
 		Transform transform = base.transform;
 		Vector3 position = new Vector3(base.transform.position.x, this.height, base.transform.position.z);
@@ -42,8 +54,39 @@ public class PlatformScript : MonoBehaviour
 		transform.position = position;
 		this.ps.height = this.height + this.offset;
 		this.audioDevice.Stop();
+		this.itsOnFloor = true;
 		yield break;
 	}
+
+    private IEnumerator LiftDown()
+    {
+        while (base.transform.position.y < this.height)
+        {
+            base.transform.position = base.transform.position - Vector3.up * (this.speed * Time.deltaTime);
+            this.ps.height = base.transform.position.y + this.offset;
+            this.itsOnFloor = false;
+            yield return null;
+        }
+        Transform transform = base.transform;
+        Vector3 position = new Vector3(base.transform.position.x, this.height, base.transform.position.z);
+        base.transform.position = position;
+        transform.position = position;
+        this.ps.height = this.height + this.offset;
+        this.audioDevice.Stop();
+        this.itsOnFloor = true;
+        yield break;
+    }
+
+    public void CallElevator()
+    {
+        if (currentMode == Mode.Up)
+        {
+
+        }
+        else if (currentMode == Mode.Down)
+        {
+        }
+    }
 
 
     // Token: 0x04000092 RID: 146
@@ -85,7 +128,15 @@ public class PlatformScript : MonoBehaviour
 
 	private GameObject GameController;
 
-	public int reverse;
+	public bool itsOnFloor;
 
-	int i;
+    public enum Mode
+    {
+        // Token: 0x04000717 RID: 1815
+        Up,
+        // Token: 0x04000718 RID: 1816
+        Down
+    }
+
+    public PlatformScript.Mode currentMode;
 }

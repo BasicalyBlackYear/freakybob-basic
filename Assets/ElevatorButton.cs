@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -25,25 +26,15 @@ public class ElevatorButton : MonoBehaviour
 
     public float distance;
 
-    public Animator ElvDoor0;
-    public Animator ElvDoor1;
-    public Animator ElvDoor2;
-
-    public enum Mode
-    {
-        // Token: 0x04000717 RID: 1815
-        Up,
-        // Token: 0x04000718 RID: 1816
-        Down
-    }
-
-    public ElevatorButton.Mode currentMode;
-
     public bool stillsPressed;
 
     public Transform playerTransform;
 
-    public PlatformScript Elevator;
+    public PlatformScript elevator;
+
+    public ElevatorDoor[] doors = new ElevatorDoor[5];
+
+
 
 
     // Start is called before the first frame update
@@ -70,19 +61,18 @@ public class ElevatorButton : MonoBehaviour
             if (Physics.Raycast(ray, out raycastHit) && (raycastHit.collider == this.trigger))
             {
                 this.ButtonPress();
-                this.CallElevator();
-                this.ElvDoor0.SetTrigger("Open");
+                this.elevator.CallElevator();
+                if(this.elevator.itsOnFloor)
+                {
+                    this.doors[5].OpenDoor();
+                }
+                else
+                {
+                    this.doors[5].CloseDoor();
+                }
+
 
             }
-        }
-    }
-    private void CallElevator()
-    {
-        if (this.currentMode == ElevatorButton.Mode.Up)
-        {
-        }
-        else if (this.currentMode == ElevatorButton.Mode.Down)
-        {
         }
     }
 
@@ -95,4 +85,6 @@ public class ElevatorButton : MonoBehaviour
 
         this.stillsPressed = true;
     }
+
+
 }
