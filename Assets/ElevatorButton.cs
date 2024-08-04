@@ -25,6 +25,10 @@ public class ElevatorButton : MonoBehaviour
 
     public float distance;
 
+    public Animator ElvDoor0;
+    public Animator ElvDoor1;
+    public Animator ElvDoor2;
+
     public enum Mode
     {
         // Token: 0x04000717 RID: 1815
@@ -55,7 +59,7 @@ public class ElevatorButton : MonoBehaviour
         {
             this.button.material = unpressed;
             this.button.sprite = Bunpressed;
-            this.audioDevice.PlayOneShot(this.aud_Release);
+            this.audioDevice.PlayOneShot(this.aud_Release, 1);
             this.stillsPressed = false;
         }
         if ((Input.GetMouseButtonDown(0) || Singleton<InputManager>.Instance.GetActionKey(InputAction.Interact)) && Time.timeScale != 0f & Vector3.Distance(this.playerTransform.position, base.transform.position) < this.distance) //If the door is left clicked and the game isn't paused
@@ -67,6 +71,8 @@ public class ElevatorButton : MonoBehaviour
             {
                 this.ButtonPress();
                 this.CallElevator();
+                this.ElvDoor0.SetTrigger("Open");
+
             }
         }
     }
@@ -82,10 +88,8 @@ public class ElevatorButton : MonoBehaviour
 
     private void ButtonPress()
     {
-       if (this.stillsPressed)
-        {
-            this.audioDevice.PlayOneShot(this.aud_Release);
-        }
+
+       this.audioDevice.PlayOneShot(this.aud_Press, 1);
        this.button.material = pressed;
        this.button.sprite = Bpressed;
 

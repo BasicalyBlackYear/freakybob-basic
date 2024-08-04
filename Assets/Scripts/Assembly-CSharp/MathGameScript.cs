@@ -17,7 +17,7 @@ public class MathGameScript : MonoBehaviour
 			this.endDelay = 1f;
 		}
         this.gc.ActivateLearningGame();
-        if (this.gc.notebooks == 1)
+        if (this.gc.notebooks == 0)
         {
             this.QueueAudio(this.bal_intro);
             this.QueueAudio(this.bal_howto);
@@ -54,7 +54,7 @@ public class MathGameScript : MonoBehaviour
             this.endDelay -= 1f * Time.unscaledDeltaTime;
             if (this.endDelay <= 0f)
             {
-                GC.Collect();
+                this.gc.CollectNotebook();
                 this.ExitGame();
             }
         }
@@ -69,7 +69,7 @@ public class MathGameScript : MonoBehaviour
         if (this.problem <= 3)
         {
             this.QueueAudio(this.bal_problems[this.problem - 1]);
-            if ((this.gc.mode == "story" & (this.problem <= 2 || this.gc.notebooks <= 1)) || (this.gc.mode == "endless" & (this.problem <= 2 || this.gc.notebooks != 2)))
+            if ((this.gc.mode == "story" & (this.problem <= 2 || this.gc.notebooks <= 0)) || (this.gc.mode == "endless" & (this.problem <= 2 || this.gc.notebooks != 0)))
             {
                 this.num1 = (float)Mathf.RoundToInt(UnityEngine.Random.Range(0f, 9f));
                 this.num2 = (float)Mathf.RoundToInt(UnityEngine.Random.Range(0f, 9f));

@@ -25,11 +25,6 @@ public class PlatformScript : MonoBehaviour
 			base.StartCoroutine(this.LiftUp());
 			this.wall.enabled = false;
 		}
-		else
-        {
-            base.StartCoroutine(this.LiftDown());
-			this.reverse = 1;
-        }
     }
 
 	// Token: 0x0600007C RID: 124 RVA: 0x00004170 File Offset: 0x00002570
@@ -49,27 +44,6 @@ public class PlatformScript : MonoBehaviour
 		this.audioDevice.Stop();
 		yield break;
 	}
-
-private IEnumerator LiftDown()
-{
-    this.reverse = 1;
-    float startY = base.transform.position.y;
-    float targetY = startY - this.height;
-
-    while (base.transform.position.y > targetY)
-    {
-        base.transform.position = Vector3.MoveTowards(
-            base.transform.position,
-            new Vector3(base.transform.position.x, targetY, base.transform.position.z),
-            this.speed * Time.deltaTime
-        );
-        this.ps.height = base.transform.position.y + this.offset;
-        yield return null;
-    }
-
-    this.reverse = 0;
-    yield break;
-}
 
 
     // Token: 0x04000092 RID: 146

@@ -40,9 +40,9 @@ public class NotebookScript : MonoBehaviour
 				base.transform.position = new Vector3(base.transform.position.x, -20f, base.transform.position.z);
 				this.up = false;
 				this.respawnTime = 120f;
-				this.gc.CollectNotebook();
 				if (this.noMath)
                 {
+					this.gc.CollectNotebook();
 					this.gc.player.stamina = 100;
 
 					if (this.gc.notebooks == 1 & !this.gc.spoopMode)

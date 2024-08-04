@@ -148,15 +148,29 @@ public class GameControllerScript : MonoBehaviour
 		}
 	}
 
-	// Token: 0x06000967 RID: 2407 RVA: 0x00022024 File Offset: 0x00020424
-	public void CollectNotebook()
-	{
-		this.notebooks++;
-		this.UpdateNotebookCount();
-	}
+    // Token: 0x06000967 RID: 2407 RVA: 0x00022024 File Offset: 0x00020424
+    public void CollectNotebook()
 
-	// Token: 0x06000968 RID: 2408 RVA: 0x0002203A File Offset: 0x0002043A
-	public void LockMouse()
+    {
+
+        this.notebooks++;
+
+        this.UpdateNotebookCount();
+
+        YTPsAnim.Play("YTPs", -1);
+
+        YTPsAnimAdd.Play("YTPsAdd", -1);
+
+        this.YTPsFA = UnityEngine.Random.Range(5, 15);
+
+        this.YTPs += YTPsFA;
+
+        this.audioDevice.PlayOneShot(YTPsSound, 1f);
+
+    }
+
+    // Token: 0x06000968 RID: 2408 RVA: 0x0002203A File Offset: 0x0002043A
+    public void LockMouse()
 	{
 		if (!this.learningActive)
 		{
@@ -839,6 +853,16 @@ public class GameControllerScript : MonoBehaviour
 
 	public GameObject hammerThrow;
 
-	// Token: 0x0400063K RID: 1604
-	//private Player playerInput;
+    public float YTPs;
+
+    public float YTPsFA;
+
+    public Animator YTPsAnim;
+
+    public Animator YTPsAnimAdd;
+
+    public AudioClip YTPsSound;
+
+    // Token: 0x0400063K RID: 1604
+    //private Player playerInput;
 }
