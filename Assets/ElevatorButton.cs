@@ -64,11 +64,11 @@ public class ElevatorButton : MonoBehaviour
                 this.elevator.CallElevator();
                 if(this.elevator.itsOnFloor)
                 {
-                    this.doors[5].OpenDoor();
+                    this.doors[4].OpenDoor();
                 }
                 else
                 {
-                    this.doors[5].CloseDoor();
+                    this.doors[4].CloseDoor();
                 }
 
 
