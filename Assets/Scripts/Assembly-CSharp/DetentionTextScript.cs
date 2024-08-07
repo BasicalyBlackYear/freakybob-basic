@@ -19,15 +19,21 @@ public class DetentionTextScript : MonoBehaviour
 		{
 			this.text.text = "You have detention! \n" + Mathf.CeilToInt(this.door.lockTime) + " seconds remain!";
 		}
-		else
-		{
-			this.text.text = string.Empty;
-		}
-	}
+		else if (this.ps.StuntTime > 0)
+        {
+            this.text.text = "Your stunned \n" + Mathf.CeilToInt(this.ps.StuntTime) + " seconds remain!";
+        }
+        else
+        {
+            this.text.text = string.Empty;
+        }
+    }
 
 	// Token: 0x0400002B RID: 43
 	public DoorScript door;
 
 	// Token: 0x0400002C RID: 44
 	private TMP_Text text;
+
+	public PlayerScript ps;
 }

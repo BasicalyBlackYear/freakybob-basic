@@ -59,6 +59,14 @@ public class PlayerScript : MonoBehaviour
 			this.sweeping = false;
 			this.hugging = false;
 		}
+		if (this.stunned && this.StuntTime > 0f) 
+		{
+			this.StuntTime -= Time.deltaTime;
+			if (this.StuntTime < 0f)
+			{
+				this.UnstuntPlayer();
+			}
+		}
 	}
 
 	// Token: 0x060009D5 RID: 2517 RVA: 0x00025E00 File Offset: 0x00024200
@@ -197,7 +205,11 @@ public class PlayerScript : MonoBehaviour
 		{
 			this.ActivateJumpRope();
 		}
-	}
+        else if (other.transform.name == "Ill" & !this.stunned & this.ill.playCool <= 0f)
+        {
+            this.StuntPlayer();
+        }
+    }
 
 	// Token: 0x060009D9 RID: 2521 RVA: 0x0002638C File Offset: 0x0002478C
 	public IEnumerator KeepTheHudOff()
@@ -282,6 +294,19 @@ public class PlayerScript : MonoBehaviour
 	{
 		this.bootsActive = true;
 		base.StartCoroutine(this.BootTimer());
+	}
+
+	public void StuntPlayer() 
+	{
+        this.frozenPosition = base.transform.position;
+		this.stunned = true;
+        this.StuntTime = 10f;
+		this.ill.audioDevice.PlayOneShot(this.ill.aud_Hehe);
+    }
+
+	public void UnstuntPlayer()
+	{
+		this.stunned = false;
 	}
 
 	// Token: 0x060009E1 RID: 2529 RVA: 0x0002654C File Offset: 0x0002494C
@@ -424,4 +449,10 @@ public class PlayerScript : MonoBehaviour
     private CameraScript cameraScript;
 
     public bool camera3dIsActive;
+
+	public bool stunned;
+
+	public IllScript ill;
+
+	public float StuntTime;
 }
